@@ -25,11 +25,11 @@
 
       {% else %}
       <div class="ui item">
-      <a href="" class="ui primary button">Login</a>
+      <a href={% url 'login' %} class="ui primary button">Login</a>
       </div>
       
       <div class="ui item">
-      <a href="" class="ui primary button">Register</a>
+      <a href={% url 'register' %} class="ui primary button">Register</a>
       </div>
 
       {% endif %}
