@@ -3,6 +3,7 @@ from .forms import errandsForm
 from .models import errands
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 def get_showing_Errands(request, Errands):
 
@@ -47,3 +48,8 @@ def create_errands(request):
 
 def errands_detail(request, id):
     return render(request, 'Errands/errands-detail.html', {})
+
+def errands_detail(request, id):
+    Errands = get_object_or_404(errands, pk=id)
+    context = {'errands': errands}
+    return render(request, 'errands/errands-detail.html', context)
