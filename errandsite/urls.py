@@ -21,3 +21,5 @@ urlpatterns = [
     path('', include('errands.urls')),
     path('auth', include('authentication.urls')),
 ]
+
+handler404 = "helpers.views.handle_not_found"
