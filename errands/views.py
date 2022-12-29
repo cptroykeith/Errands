@@ -6,7 +6,13 @@ from django.urls import reverse
 
 # Create your views here.
 def index(request):
-    return render(request, 'errands/index.html')
+    Errands = errands.objects.all()
+
+    completed_count=Errands,filter(is_completed=True).count()
+    incompleted_count=Errands,filter(is_completed=False).count()
+
+    context = {'Errands' : Errands}
+    return render(request, 'errands/index.html',context)
 
 def create_errands(request):
     form = errandsForm()
@@ -19,15 +25,15 @@ def create_errands(request):
 
         Errands=errands()
         
-        errands.title = title
-        errands.description = description
-        errands.is_completed  = True if is_completed == "on" else False
+        Errands.title = title
+        Errands.description = description
+        Errands.is_completed  = True if is_completed == "on" else False
 
         Errands.save()
 
-        return HttpResponseRedirect(reverse("errands",kwargs={'id': errands.pk}))
+        return HttpResponseRedirect(reverse("errands",kwargs={'id': Errands.pk}))
 
-    return render(request, 'errands/create-errands.html', context)
+    return render(request, 'Errands/create-errands.html', context)
 
 def errands_detail(request, id):
-    return render(request, 'errands/errands-detail.html', {})
+    return render(request, 'Errands/errands-detail.html', {})

@@ -3,18 +3,100 @@
 
 {% load static %}
 
+
 {% block content %}
 
-    <img src="{% static 'img/Logo.png' %}" />
+     <h1>My Lists of Errands</h1>
 
-    <h3>Lists of errands</h3>
+    {% if Errands %}
 
-    <ul>
-        <li>Go Home</li>
-        <li>Go Home</li>
-        <li>Go Home</li>
-        <li>Go Home</li>
-        <li>Go Home</li>
-    </ul>
+    <table class="ui table">
+
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Completed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for errands in Errands %}
+
+            <tr>
+
+                <td>{{errands.title}}</td>
+                <td>{{errands.description}}</td>
+
+                <td>
+                    
+                    {% if errands.is_completed %}
+
+                    YES<i class="check icon green"></i>
+
+                    {% else %}
+                    NO 
+                    
+                 {% endif %}
+                
+                </td>
+
+                <td>
+
+                    <a href ="" class="ui button">
+                        <i class="eye icon"></i>
+                    </a>
+
+                    <a href ="" class="ui button">
+                        <i class="pencil icon"></i>
+                    </a>
+                </td>
+
+            </tr>
+
+
+            {% endfor %}
+
+
+        </tbody>
+        <tfoot>
+            <tr>
+              <th>
+             <a href="?filter=all">All {{all_count}}</a> 
+              </th>
+              <th>
+              <a href="?filter=incomplete">
+              {{incomplete_count}} Remaining 
+              </a> 
+              </th>
+              <th>
+                <a href="?filter=complete">
+              {{completed_count}} Completed
+       
+              </a> 
+              </th>
+              <th></th>
+            </tr>
+          </tfoot>
+
+    </table>
+
+
+    {% else %}
+
+    <div class="ui message">
+        <div class="header">
+            No items yet
+        </div>
+        <p>You can create your first errand now<a href={% url 'create-errands' %}>Add new</a></p>
+    </div>
+
+
+
+    {% endif %}
+
+
 
     {% endblock content %}
