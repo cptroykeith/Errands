@@ -6,7 +6,14 @@
 {% block content %}
 
 
-    <h3>errands</h3>
+    <h3>create errands</h3>
+
+    <form class="ui form" method="POST" action={% url 'create-errands' %}>
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <input type="submit" class="ui button primary" value="submit">
+    </form>
 
     
     {% endblock content %}
