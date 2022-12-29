@@ -64,3 +64,25 @@ def errands_delete(request, id):
         
     return render(request, 'errands/errands-delete.html', context)
 
+def errands_edit(request,id):
+    Errands = get_object_or_404(errands, pk=id)
+    form=errandsForm(instance=Errands)
+    context = {'errands': Errands, 'form':form}
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        is_completed = request.POST.get('is_completed',False)
+
+        Errands=errands()
+         
+        Errands.title = title
+        Errands.description = description
+        Errands.is_completed  = True if is_completed == "on" else False
+
+        Errands.save()
+
+        return HttpResponseRedirect(reverse("errands",kwargs={'id': Errands.pk}))
+
+
+    return render(request, 'errands/errands-edit.html', context)

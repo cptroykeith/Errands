@@ -1,0 +1,17 @@
+{% extends '_partials/base.html' %}
+
+
+{% block content %}
+
+
+    <h3>edit errands</h3>
+
+    <form class="ui form" method="POST" action={% url 'errands-edit' errands.id %}>
+        {% csrf_token %}
+        {{form.as_p}}
+
+        <input type="submit" class="ui button primary" value="Save">
+    </form>
+
+    
+    {% endblock content %}

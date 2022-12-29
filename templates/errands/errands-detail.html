@@ -36,7 +36,7 @@
             </p>
 
             {% endif %}
-         <a href="" class="ui button primary">Edit</a>
+         <a href={% url 'errands-edit' errands.id %} class="ui button primary">Edit</a>
          <a href={% url 'errands-delete' errands.id %} class="ui button red">Delete this errand</a>
         </div>
 
