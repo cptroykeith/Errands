@@ -7,4 +7,5 @@ class errandsForm(forms.ModelForm):
     class Meta:
         model = errands
 
-        fields = "__all__"
+        fields = ['title', 'description', 'is_completed']
+         

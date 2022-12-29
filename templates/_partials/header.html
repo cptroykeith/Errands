@@ -10,7 +10,7 @@
         <a href={% url 'create-errands' %} class="ui primary button">Create errands</a>
         {% if request.user.is_authenticated %}
       <div class="ui simple dropdown item">
-         User x <i class="dropdown icon"></i>
+         {{request.user.username}} <i class="dropdown icon"></i>
         <div class="menu">
         <form class="ui large form" method="post" action="">
 

@@ -17,7 +17,7 @@ def get_showing_Errands(request, Errands):
     return Errands
 
 def index(request):
-    Errands = errands.objects.all()
+    Errands = errands.objects.filter(owner=request.user)
 
     completed_count = Errands.filter(is_completed=True).count()
     incomplete_count = Errands.filter(is_completed=False).count()
@@ -41,7 +41,7 @@ def create_errands(request):
         Errands.title = title
         Errands.description = description
         Errands.is_completed  = True if is_completed == "on" else False
-
+        Errands.owner = request.user
         Errands.save()
 
         messages.add_message(request, messages.SUCCESS, "Errands created successfully")
