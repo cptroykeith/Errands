@@ -6,7 +6,9 @@
 
 {% block content %}
 
-     <h1>My Lists of Errands</h1>
+     <h1 class="ui header">My Lists of Errands</h1>
+
+     {% include '_partials/messages.html' %}
 
     {% if Errands %}
 

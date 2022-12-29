@@ -4,6 +4,8 @@ from .models import errands
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
+
 
 def get_showing_Errands(request, Errands):
 
@@ -42,6 +44,8 @@ def create_errands(request):
 
         Errands.save()
 
+        messages.add_message(request, messages.SUCCESS, "Errands created successfully")
+
         return HttpResponseRedirect(reverse("errands",kwargs={'id': Errands.pk}))
 
     return render(request, 'Errands/create-errands.html', context)
@@ -60,6 +64,10 @@ def errands_delete(request, id):
 
     if request.method == 'POST':
         Errands.delete()
+
+        messages.add_message(request, messages.SUCCESS, "Errands Deleted")
+
+
         return HttpResponseRedirect(reverse('home'))
         
     return render(request, 'errands/errands-delete.html', context)
@@ -81,6 +89,8 @@ def errands_edit(request,id):
         Errands.is_completed  = True if is_completed == "on" else False
 
         Errands.save()
+
+        messages.add_message(request, messages.SUCCESS, "Errands update success")
 
         return HttpResponseRedirect(reverse("errands",kwargs={'id': Errands.pk}))
 

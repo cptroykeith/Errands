@@ -8,6 +8,8 @@
 
     <h3>create errands</h3>
 
+    {% include '_partials/messages.html' %}
+
     <form class="ui form" method="POST" action={% url 'create-errands' %}>
         {% csrf_token %}
         {{form.as_p}}
