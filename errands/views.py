@@ -51,5 +51,16 @@ def errands_detail(request, id):
 
 def errands_detail(request, id):
     Errands = get_object_or_404(errands, pk=id)
-    context = {'errands': errands}
+    context = {'errands': Errands}
     return render(request, 'errands/errands-detail.html', context)
+
+def errands_delete(request, id):
+    Errands = get_object_or_404(errands, pk=id)
+    context = {'errands': Errands}
+
+    if request.method == 'POST':
+        Errands.delete()
+        return HttpResponseRedirect(reverse('home'))
+        
+    return render(request, 'errands/errands-delete.html', context)
+

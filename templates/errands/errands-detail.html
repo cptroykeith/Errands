@@ -8,24 +8,24 @@
 
     <h1  class="ui header">Detail</h1>
 
-    {% include '_partials/messages.html' %}
+    
 
     <div class="ui card">
         <div class="content">
-          <div class="header">{{todo.title}}</div>
-          <div class="meta">{{todo.created_at}}</div>
+          <div class="header">{{errands.title}}</div>
+          <div class="meta">{{errands.created_at}}</div>
           <div class="description">
-            <p>{{todo.description}}</p>
+            <p>{{errands.description}}</p>
           </div>
         </div>
         <div class="extra content">
 
-            {% if todo.is_completed%}
+            {% if errands.is_completed%}
           
           <p>
           <i class="check icon green"></i>
       
-          Completed at {{todo.updated_at}}
+          Completed at {{errands.updated_at}}
           </p>
 
           {% else %}
@@ -36,8 +36,8 @@
             </p>
 
             {% endif %}
-         <a href={% url 'todo-edit' todo.id %} class="ui button primary">Edit</a>
-         <a href={% url 'todo-delete' todo.id %} class="ui button red">Delete this todo</a>
+         <a href="" class="ui button primary">Edit</a>
+         <a href={% url 'errands-delete' errands.id %} class="ui button red">Delete this errand</a>
         </div>
 
 
