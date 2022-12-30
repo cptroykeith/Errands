@@ -5,6 +5,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 
 def get_showing_Errands(request, Errands):
@@ -16,6 +18,8 @@ def get_showing_Errands(request, Errands):
             return Errands.filter(is_completed=False)
     return Errands
 
+
+@login_required
 def index(request):
     Errands = errands.objects.filter(owner=request.user)
 
@@ -27,6 +31,7 @@ def index(request):
     context = {'Errands' : get_showing_Errands(request, Errands), 'all_count' :all_count, 'completed_count': completed_count, 'incomplete_count': incomplete_count}
     return render(request, 'errands/index.html',context)
 
+@login_required
 def create_errands(request):
     form = errandsForm()
     context = {'form': form}
@@ -50,28 +55,26 @@ def create_errands(request):
 
     return render(request, 'Errands/create-errands.html', context)
 
-def errands_detail(request, id):
-    return render(request, 'Errands/errands-detail.html', {})
-
+@login_required
 def errands_detail(request, id):
     Errands = get_object_or_404(errands, pk=id)
     context = {'errands': Errands}
     return render(request, 'errands/errands-detail.html', context)
-
+@login_required
 def errands_delete(request, id):
     Errands = get_object_or_404(errands, pk=id)
     context = {'errands': Errands}
 
     if request.method == 'POST':
-        Errands.delete()
+        if Errands.owner == request.user:
+            Errands.delete()
 
-        messages.add_message(request, messages.SUCCESS, "Errands Deleted")
+            messages.add_message(request, messages.SUCCESS, "Errands Deleted")
 
-
-        return HttpResponseRedirect(reverse('home'))
-        
+            return HttpResponseRedirect(reverse('home'))
     return render(request, 'errands/errands-delete.html', context)
-
+    
+@login_required
 def errands_edit(request,id):
     Errands = get_object_or_404(errands, pk=id)
     form=errandsForm(instance=Errands)
@@ -88,7 +91,8 @@ def errands_edit(request,id):
         Errands.description = description
         Errands.is_completed  = True if is_completed == "on" else False
 
-        Errands.save()
+        if Errands.owner == request.user:
+         Errands.save()
 
         messages.add_message(request, messages.SUCCESS, "Errands update success")
 
