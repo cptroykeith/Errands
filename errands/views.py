@@ -73,7 +73,7 @@ def errands_delete(request, id):
 
             return HttpResponseRedirect(reverse('home'))
     return render(request, 'errands/errands-delete.html', context)
-    
+
 @login_required
 def errands_edit(request,id):
     Errands = get_object_or_404(errands, pk=id)
@@ -85,7 +85,7 @@ def errands_edit(request,id):
         description = request.POST.get('description')
         is_completed = request.POST.get('is_completed',False)
 
-        Errands=errands()
+    
          
         Errands.title = title
         Errands.description = description
