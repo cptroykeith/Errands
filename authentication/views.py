@@ -24,7 +24,6 @@ class EmailThread(threading.Thread):
     def run(self):
         self.email.send()
 
-
 def send_activation_email(user,request):
     current_site= get_current_site(request)
     email_subject = 'Activate your account'
