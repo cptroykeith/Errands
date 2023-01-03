@@ -4,9 +4,10 @@ from validate_email import validate_email
 from .models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
+from helpers.decorator import auth_user_should_not_access
 
 
-
+@auth_user_should_not_access
 def  register(request):
     if request.method == "POST":
         context = {'has_error': False, 'data':request.POST}
