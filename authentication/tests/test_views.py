@@ -1,10 +1,12 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.messages import get_messages
+from utils.setup_test import TestSetup
 
-class TestViews(TestCase):
+class TestViews(TestSetup):
 
     def test_should_show_register_page(self):
+        
         response = self.client.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "authentication/register.html")
@@ -16,14 +18,7 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "authentication/login.html")
 
 
-    def test_should_signup_user(self):
-        self.user={
-            "username": "username",
-            "email": "email@gmail.com",
-            "password": "password",
-            "password2": "password"
-
-        }
+    
         response = self.client.post(reverse("register"), self.user)
         self.assertEqual(response.status_code, 302)
 
