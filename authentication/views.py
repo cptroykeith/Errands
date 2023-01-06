@@ -93,6 +93,8 @@ def  register(request):
         
     return render(request,'authentication/register.html')
 
+
+@auth_user_should_not_access
 def  login_user(request):
 
     if request.method  == 'POST':
@@ -102,7 +104,7 @@ def  login_user(request):
 
         user=authenticate(request,username=username, password=password)
 
-        if not user.is_email_verified:
+        if user and not user.is_email_verified:
             messages.add_message(request, messages.ERROR, 'Email is not verified, please check email inbox')
             return render(request,'authentication/login.html',context)
 
