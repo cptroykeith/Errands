@@ -19,7 +19,7 @@ class TestViews(TestSetup):
 
     def test_should_signup_user(self):
         response = self.client.post(reverse("register"), self.user)
-        self.assertEqual(response.status_code, 302)
+        self.assertEquals(response.status_code, 302)
 
 
     def test_should_not_signup_user_with_taken_username(self):
@@ -32,7 +32,7 @@ class TestViews(TestSetup):
         }
         self.client.post(reverse("register"), self.user)
         response = self.client.post(reverse("register"), self.user)
-        self.assertEqual(response.status_code, 409)
+        self.assertEquals(response.status_code, 409)
 
         storage = get_messages(response.wsgi_request)
 
@@ -57,7 +57,7 @@ class TestViews(TestSetup):
         }
         self.client.post(reverse("register"), self.user)
         response = self.client.post(reverse("register"), self.test_user2)
-        self.assertEqual(response.status_code, 409)
+        self.assertEquals(response.status_code, 409)
     
     def test_should_login_successfully(self):
         user = self.create_test_user()
