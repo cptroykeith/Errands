@@ -98,21 +98,21 @@ def  register(request):
 def  login_user(request):
 
     if request.method  == 'POST':
-        context={'data':request.POST}
+        context = {'data':request.POST}
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user=authenticate(request,username=username, password=password)
+        user = authenticate(request,username=username, password=password)
 
         if user and not user.is_email_verified:
             messages.add_message(request, messages.ERROR, 'Email is not verified, please check email inbox')
-            return render(request,'authentication/login.html',context)
+            return render(request,'authentication/login.html', context, status=401)
 
 
 
         if not user:
-            messages.add_message(request, messages.ERROR, 'Invalid credentials')
-            return render(request,'authentication/login.html',context)
+            messages.add_message(request, messages.ERROR, 'Invalid credentials, try again')
+            return render(request,'authentication/login.html', context, status=401)
 
         login(request, user)
 
