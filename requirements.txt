@@ -1,5 +1,6 @@
 asgiref==3.6.0
 auxlib==0.0.43
+coverage==5.5
 Django==3.2.15
 Faker==16.1.0
 psycopg2-binary==2.9.5
