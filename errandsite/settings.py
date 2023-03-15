@@ -28,7 +28,7 @@ DEBUG = True
 
 TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'errands-production.up.railway.app']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', 'errands-production.up.railway.app']
 
 AUTH_USER_MODEL = "authentication.User"
 
