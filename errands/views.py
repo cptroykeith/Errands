@@ -53,7 +53,7 @@ def create_errands(request):
 
         return HttpResponseRedirect(reverse("errands",kwargs={'id': Errands.pk}))
 
-    return render(request, 'Errands/create-errands.html', context)
+    return render(request, 'errands/create-errands.html', context)
 
 @login_required
 def errands_detail(request, id):
