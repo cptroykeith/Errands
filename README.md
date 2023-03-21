@@ -20,7 +20,7 @@ And then start the server (default: http://localhost:8000)
     python manage.py runserver
 
 
-or start on the [landing page](http://localhost:8000/)
+Webapp is hosted on railway [Errands](https://errands-production.up.railway.app/auth/login?next=/)
 
 
 [license-url]: https://github.com/rtzll/django-todolist/blob/master/LICENSE
